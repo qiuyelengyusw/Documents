@@ -1,0 +1,94 @@
+
+
+<Huawei>
+Dec 17 2021 20:05:46-08:00 Huawei %%01IFPDT/4/IF_STATE(l)[0]:Interface GigabitEthernet0/0/0 has turned into UP state.
+<Huawei>
+Dec 17 2021 20:05:46-08:00 Huawei %%01IFNET/4/LINK_STATE(l)[1]:The line protocol IP on the interface GigabitEthernet0/0/0 has entered the UP state. 
+<Huawei>
+Dec 17 2021 20:05:46-08:00 Huawei %%01IFPDT/4/IF_STATE(l)[2]:Interface Ethernet0/0/0 has turned into UP state.
+<Huawei>
+Dec 17 2021 20:05:46-08:00 Huawei %%01IFNET/4/IF_STATE(l)[3]:Interface Vlanif10 has turned into UP state. 
+<Huawei>
+Dec 17 2021 20:05:46-08:00 Huawei %%01IFNET/4/LINK_STATE(l)[4]:The line protocol IP on the interface Vlanif10 has entered the UP state. 
+<Huawei>dis cur
+dis cur
+[V200R003C00]
+#
+ snmp-agent local-engineid 800007DB03000000000000
+ snmp-agent 
+#
+ clock timezone China-Standard-Time minus 08:00:00
+#
+portal local-server load flash:/portalpage.zip
+#
+ drop illegal-mac alarm
+#
+ dns resolve  
+ dns server 192.168.31.1 
+ dns server 112.100.100.100 
+ dns proxy enable
+#
+vlan batch 10
+#
+ wlan ac-global carrier id other ac id 0
+#
+ set cpu-usage threshold 80 restore 75
+#
+dhcp enable
+#
+dhcp server database enable               
+  ---- More ----
+#                                         
+acl number 2000                           
+  ---- More ----
+ rule 5 permit source 192.168.10.0 0.0.0.255 
+#                                         
+  ---- More ----
+ip pool 10                                
+ gateway-list 192.168.10.1                
+  ---- More ----
+ network 192.168.10.0 mask 255.255.255.0  
+ dns-list 192.168.31.1                    
+  ---- More ----
+#                                         
+aaa                                       
+  ---- More ----
+ authentication-scheme default            
+ authorization-scheme default             
+  ---- More ----
+ accounting-scheme default                
+ domain default                           
+  ---- More ----
+ domain default_admin                     
+ local-user admin password cipher %$%$K8m.Nt84DZ}e#<0`8bmE3Uw}%$%$
+  ---- More ----
+ local-user admin service-type http       
+#                                         
+  ---- More ----
+firewall zone Local                       
+ priority 15                              
+  ---- More ----
+#                                         
+interface Vlanif10                        
+  ---- More ----
+ ip address 192.168.10.1 255.255.255.0    
+ dhcp select global                       
+  ---- More ----
+#                                         
+interface Ethernet0/0/0                   
+  ---- More ----
+ port link-type access                    
+ port default vlan 10                     
+  ---- More ----
+#                                         
+interface Ethernet0/0/1                   
+  ---- More ----
+#                                         
+interface Ethernet0/0/2                   
+  ---- More ----
+#                                         
+interface Ethernet0/0/3                   
+  ---- More ----
+#                                         
+interface Ethernet0/0/4                   
+  ---- More ----^A
